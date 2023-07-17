@@ -28,12 +28,12 @@ namespace TaskLVL1
 			//double money;
 			//int grn, cop;
 
-			Console.Write("Введите сумму: ");
+			/*Console.Write("Введите сумму: ");
 			double money = Convert.ToDouble(Console.ReadLine());
 			Console.WriteLine(money);
 			int grn = (int) money;
 			int cop = (int)((money - grn) * 100);
-			Console.WriteLine($"{grn} грн. {cop} коп.");
+			Console.WriteLine($"{grn} грн. {cop} коп.");*/
 
 			//Задача 2
 			Console.Write("Цена тетради (грн.): ");
