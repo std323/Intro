@@ -33,7 +33,7 @@ namespace TaskLVL1
 			Console.WriteLine(money);
 			int grn = (int) money;
 			int cop = (int)((money - grn) * 100);
-			Console.WriteLine($"{grn} грн. {cop} коп.");*/
+			Console.WriteLine($"{grn} грн. {cop} коп.");
 
 			//Задача 2
 			Console.Write("Цена тетради (грн.): ");
@@ -68,7 +68,7 @@ namespace TaskLVL1
 			double price_of_fuel = Convert.ToDouble(Console.ReadLine());
 			double cost_of_trip = (((distance / 100) * consumption) * price_of_fuel) * 2;
 			Console.Write("Поездка на дачу и обратно обойдется в ");
-			Console.WriteLine($"{cost_of_trip} грн.");
+			Console.WriteLine($"{cost_of_trip} грн.");*/
 
 			#endregion TASK_3
 
@@ -111,24 +111,60 @@ namespace TaskLVL1
 			} while (key != ConsoleKey.Escape);*/
 			#endregion SHOOTER
 
-			/*Console.CursorTop = 10;
-			Console.CursorLeft = 10;
+			/*Console.SetWindowPosition(0, 0);
+			Console.BufferWidth = Console.WindowWidth + 1;
+			Console.BufferHeight = Console.WindowHeight + 1;
+			Console.WriteLine($"Buffer: {Console.BufferWidth} {Console.BufferHeight}");
+			Console.WriteLine($"Window: {Console.WindowWidth} {Console.WindowHeight}");
+
+
+			Random rand = new Random();
+			int x = rand.Next(Console.WindowWidth-1);
+			int y = rand.Next(Console.WindowHeight-1);
 			Console.CursorVisible = false;
 			ConsoleKey key;
 			do
 			{
+				int outOfRange = 0;
 				key = Console.ReadKey(true).Key;
 				switch (key)
 				{
-					case ConsoleKey.W: Console.CursorTop++; break;
-					case ConsoleKey.S: Console.CursorTop--; break;
-					case ConsoleKey.A: Console.CursorLeft--; break;
-					case ConsoleKey.D: Console.CursorLeft++; break;
-					default: Console.Beep(); break;
+					case ConsoleKey.UpArrow:
+					case ConsoleKey.W: y--; break;
+					case ConsoleKey.DownArrow:
+					case ConsoleKey.S: y++; break;
+					case ConsoleKey.LeftArrow:
+					case ConsoleKey.A: x--; break;
+					case ConsoleKey.RightArrow:
+					case ConsoleKey.D: x++; break;
+					default: Console.Beep(500, 500); break;
 				}
+				if (x < 0) { x = 0; outOfRange++; }
+				if (y < 0) { y = 0; outOfRange++; }
+				
+				if (x >= Console.WindowWidth - 1) { x = Console.WindowWidth - 1; outOfRange++; }
+				if (y >= Console.WindowHeight - 1) { y = Console.WindowHeight - 1; outOfRange++; }
+				if (outOfRange>0) Console.Beep();
+				Console.Clear();
 				Console.BackgroundColor = ConsoleColor.Blue;
+				Console.SetCursorPosition(x, y);
 				Console.WriteLine(" ");
 				Console.BackgroundColor = ConsoleColor.Black;
+
+				Console.SetCursorPosition(0, 0);
+				Console.WriteLine("X = " + x);
+				Console.WriteLine("Y = " + y);
+				try
+				{
+					
+				}
+				catch (Exception e)
+				{
+					Console.SetCursorPosition(1, Console.BufferHeight - 2);
+					Console.WriteLine(e.Message);
+					
+				}
+
 			} while (key !=ConsoleKey.Escape);*/
 
 
