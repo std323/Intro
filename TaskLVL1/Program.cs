@@ -8,8 +8,165 @@ using System.Threading.Tasks;
 
 namespace TaskLVL1
 {
+	
 	internal class Program
-	{
+	{ 
+		bool quit = false;
+		int vx;
+		int vy;
+		int headX;
+		int headY;
+		int[,] GameField;//Игровое поле
+		int w = 80, h = 40;//ширина и высота игрового поля
+		int score = 0;
+		int lifes = 3;
+		int apples;
+		int level = 0;
+
+		void Init()
+		{
+			Console.CursorVisible = false;
+			Console.SetWindowSize(w + 1, h + 3);
+			Console.SetBufferSize(w + 1, h + 3);
+		}
+		void Load (int level=1 )
+		{
+			int vx= 0;
+			int vy= 1;
+            int headX= w/2;
+			int headY= h/2;
+			GameField = new int[w + 1, h + 1];//Создаем игровое поле
+			GameField[headX, headY] = 1;//Голова змеи
+			Random random = new Random();
+			apples = level + 1; 
+			//Разбрасываем яблоки
+			for (int i = 0; i < apples; i++)
+				//Генерируются индексы в массиве и рисуется яблоко
+				GameField[random.Next(1, w), random.Next(1, h)] = -1;
+
+			//создаем бардюры
+			for(int i=0; i<=w; i++)
+			{
+				GameField[i, 0] = 10000;
+				GameField[i, h] = 10000;
+			}
+			for (int i = 0; i < h; i++)
+			{
+				GameField[0, i] = 10000;
+				GameField[w, i] = 10000;
+			}
+		}
+		void PrintGameField()
+		{
+			
+			for(int y = 0; y <= h; y++)
+				for (int x = 0; x <= w; x++)
+				{
+					
+					Console.SetCursorPosition(x, y + 1);
+					
+					switch (GameField[x, y])
+					{
+						case 0: 
+							Console.WriteLine(' ');
+							break;
+						case -1: 
+							Console.WriteLine('&');
+							break;
+                        case 1: 
+							Console.WriteLine('1'); 
+							break;
+						default: Console.WriteLine('#'); 
+							break;
+					}
+				}
+			Console.SetCursorPosition(10, 0);
+			Console.Write($"Level:{level} Score:{score} Lifes:{lifes} Apples:{apples}");
+		}
+		void KeyboardUpdate()
+		{
+			if (Console.KeyAvailable)
+			{
+				ConsoleKey key = Console.ReadKey().Key;
+				switch (key)
+				{
+					case ConsoleKey.UpArrow:
+					case ConsoleKey.W: vy--; break;
+					case ConsoleKey.DownArrow:
+					case ConsoleKey.S: vy++; break;
+					case ConsoleKey.LeftArrow:
+					case ConsoleKey.A: vx--; break;
+					case ConsoleKey.RightArrow:
+					case ConsoleKey.D: vx++; break;
+					case ConsoleKey.Escape: quit = true; break;
+					
+				}
+			}
+			
+		}
+		//Рисование змейки - рекурсивный
+		void Next(int tailX, int tailY, int n, int p = 0)
+		{
+			GameField[tailX, tailY] = n + p;
+			if (GameField[tailX + 1, tailY] == n + p) Next(GameField[tailX + 1, tailY], n + 1, p);
+			else
+			if (GameField[tailX - 1, tailY] == n + p) Next(GameField[tailX - 1, tailY], n + 1, p);
+			else
+			if (GameField[tailX, tailY - 1] == n + p) Next(GameField[tailX, tailY - 1], n + 1, p);
+			else
+			if (GameField[tailX, tailY + 1] == n + p) Next(GameField[tailX, tailY - 1], n + 1, p);
+			else
+				if (p == 0) GameField[tailY, tailX] = 0;
+		}
+		void Update()
+		{
+			headX += vx;
+			headY += vy;
+			if (Collision()) return;
+			if (GameField[headX, headY] < 0)
+			{
+				score++;
+				apples--;
+				if (apples == 0)
+				{
+					quit = true;
+					return;
+				}
+				GameField[headX, headY] = 1;
+				Next(headX - vx, headY - vy, 1, 1);
+			}
+			else
+				Next(headX, headY, 1, 1);
+
+
+		}
+		bool Collision ()
+		{
+			if (GameField[headX, headY] > 0) quit = true;
+			if (headX < 1 || headX >= w || headY < 1 || headY >= h) quit = true;
+			return quit;
+		}
+
+		public void Game()
+		{
+			Init();
+			Console.ReadKey();
+			while (lifes > 0)
+			{
+				Load(++level);
+				PrintGameField();
+				Console.ReadKey();
+				while(!quit)
+				{
+					KeyboardUpdate();
+					Update();
+					PrintGameField();
+				}
+				lifes--;
+				quit = false;
+			}
+			
+		}
 		static void Main(string[] args)
 		{
 			#region TASK_2
@@ -111,6 +268,9 @@ namespace TaskLVL1
 			} while (key != ConsoleKey.Escape);*/
 			#endregion SHOOTER
 
+			Program program = new Program();
+			program.Game();
+			Console.ReadKey();
 			/*Console.SetWindowPosition(0, 0);
 			Console.BufferWidth = Console.WindowWidth + 1;
 			Console.BufferHeight = Console.WindowHeight + 1;

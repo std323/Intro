@@ -11,7 +11,7 @@ namespace Arrays
 {
 	internal class Program
 	{
-		
+
 		static void Main(string[] args)
 		{
 			#region ARRAYS_1
@@ -129,7 +129,7 @@ namespace Arrays
 			#endregion ARRAYS_2
 
 			#region RAGGED_ARRAY
-			//Console.Write("Введите количество строк: ");
+			/*//Console.Write("Введите количество строк: ");
 			//int  rows= Convert.ToInt32(Console.ReadLine());
 			//Console.Write("Введите количество элементов строки: ");
 			//int cols= Convert.ToInt32(Console.ReadLine());
@@ -152,7 +152,7 @@ namespace Arrays
 			//ragged_arr[i][j] = rand.Next(100);
 			//}
 			//}
-			//for( int i=0;  i< ragged_arr.Length; i++)
+			//for( int i=0;  i < ragged_arr.Length; i++)
 			//{
 			//for (int j = 0; j < ragged_arr[i].Length; j++)
 			//{
@@ -160,7 +160,7 @@ namespace Arrays
 			//}
 			//Console.WriteLine();
 			//}
-			foreach (int[] i in ragged_arr)// Итератор 'i' перебирает массивы
+			foreach (int[] i in ragged_arr)//Итератор 'i' перебирает массивы
 			{
 				if (i != null)
 				{
@@ -174,41 +174,26 @@ namespace Arrays
 				{
 					Console.WriteLine("Строка пустая");
 				}
-				}
-			
+			}
+
 			//Сумма элементов массива:
 			int sum = 0;
-			
-			for (int i = 0; i < ragged_arr.Length; i++)
+			int count = 0;
+			foreach (int[] i in ragged_arr)// Итератор 'i' перебирает массивы
 			{
-				if (ragged_arr[i] != null)
+				if (i != null)
 				{
-					for (int j = 0; j < ragged_arr[i].Length; j++)
-					{
-						sum += ragged_arr[i][j];
-					}
+					sum += i.Sum();
+					count += i.Length;
 				}
 			}
 			Console.WriteLine($"Cумма элементов массива: {sum}");
+			Console.WriteLine($"Среднее-арифметическое: {(double)sum / count}");
 
-			//Среднее-арифметическое:
-			
-			double avg = sum / ragged_arr.Length;
-			//for (int i = 0; i < ragged_arr.Length; i++)
-			//{
-				//if (ragged_arr[i] != null)
-				//{
-					//for (int j = 0; j < ragged_arr[i].Length; j++)
-					//{
-						//avg = sum / ragged_arr.Length;
-					//}
-				//}
-			//}
-			Console.WriteLine($"Среднее-арифметическое: {avg}");
 			// Минимальное и максимальное значение массива:
 			int Min = 0;
 			int Max = 0;
-			for(int i=0; i < ragged_arr.Length; i++)
+			for (int i = 0; i < ragged_arr.Length; i++)
 			{
 				if (ragged_arr[i] != null)
 				{
@@ -220,24 +205,36 @@ namespace Arrays
 				}
 			}
 			Console.WriteLine($"Минимальное значение массива: {Min}");
-			Console.WriteLine($"Максимальное значение массива: {Max}");
+			Console.WriteLine($"Максимальное значение массива: {Max}");*/
 
 			#endregion RAGGED_ARRAY
 
 			#region ENUM
-			/*Season season = Season.Spring;
-				Console.WriteLine(season);
 
-				foreach(Week i in System.Enum.GetValues(typeof(Week)).Cast<Week>())
-				{
-					Console.WriteLine(i);
-				}
+			/*//Week day = Week.Sunday;
+			//Console.WriteLine(day);
+			//Console.WriteLine(Enum.GetUnderlyingType(typeof(Week)));
 
-			}
-				enum Season
+			string[] dayName = Enum.GetNames(typeof(Week));
+			int[] dayNumber = (int[])Enum.GetValues(typeof(Week));
+			for(int i=0; i < dayNumber.Length; i++)
 			{
-				Winter, Spring, Summer, Autum
-			};
+				Console.WriteLine($"Name: {dayName[i]}, \t- Value: {dayNumber[i]}");
+			}
+			Console.WriteLine(delimiter);
+
+			string[] distName = Enum.GetNames(typeof(DistanceFromSun));
+			ulong[] distValue = (ulong[])Enum.GetValues(typeof(DistanceFromSun));
+			for(int i=0; i < distName.Length; i++)
+			{
+				Console.WriteLine($"Name: {distName[i]}\t= {distValue[i]}");
+			}
+			Console.WriteLine($"Type: {Enum.GetUnderlyingType(typeof(DistanceFromSun))}");
+
+			
+
+		}
+		const string delimiter = "\n---------------------------------\n";
 			enum Week: uint
 			{
 				Sunday = 0,
@@ -247,11 +244,27 @@ namespace Arrays
 				Thursday = 4,
 				Friday = 5,
 				Saturday = 6,
-			};*/ 
+			};
+		enum DistanceFromSun : ulong
+		{
+			Sun =0,
+			Mercury = 57900000,
+			Venus = 108200000,
+			Earth = 149600000,
+			Mars = 227900000,
+			Jupiter = 7783000000,
+			Saturn = 1427000000,
+			Uranus = 2870000000,
+			Neptune = 4496000000,
+			Pluto = 594600000
+
+		}*/
 			#endregion ENUM
 		}
 	}
 	}
+
+	
 
 	
 
