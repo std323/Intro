@@ -34,7 +34,7 @@ namespace Point
 				//double distance = Math.Sqrt(x_distance * x_distance + y_distance * y_distance);
 				//return distance;
 				return Math.Sqrt(Math.Pow(this.x-other.x,2) + Math.Pow(this.y-other.y, 2));
-				//Класс Math содержит набор статических методов, реализущих математические ункции.
+				//Класс Math содержит набор статических методов, реализущих математические функции.
 			}
 			public static double distance(Point left, Point right)
 			{
@@ -56,6 +56,7 @@ namespace Point
 			}
 			public void set_y(double y)
 			{
+
 				this.y = y;
 			}
 			public Point()
@@ -83,7 +84,7 @@ namespace Point
 			
 			static void Main(string[] args)
 			{
-				
+				Console.WriteLine($"Количество точек: {Point.count}");
 				Point A;
 				A.x = 2;
 				A.y = 3;
