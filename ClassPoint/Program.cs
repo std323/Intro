@@ -8,19 +8,20 @@ namespace ClassPoint
 {
 	internal class Program
 	{
+
 		class Point
 		{
-			 double x { get; set; }
-			 double y { get; set; }
-			
-			public Point (double x, double y)
+			public double x { get; set; }
+			public double y { get; set; }
+
+			public Point(double x, double y)
 			{
 				this.x = x;
 				this.y = y;
 			}
 			public static Point operator +(Point left, Point right)
 			{
-				return new Point (left.x + right.x, left.y + right.y);
+				return new Point(left.x + right.x, left.y + right.y);
 			}
 			public static Point operator -(Point left, Point right)
 			{
@@ -93,3 +94,4 @@ namespace ClassPoint
 		}
 	}
 }
+
