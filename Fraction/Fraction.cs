@@ -41,6 +41,7 @@ namespace Fraction
 			Numerator = numerator;
 			Denominator= denominator;
 		}
+		
 		public void Print()
 		{
 			if (Integer != 0) Console.Write(Integer);
@@ -72,6 +73,7 @@ namespace Fraction
 		public static Fraction operator +(Fraction left, Fraction right)
 		{
 			return new Fraction (left.Numerator*right.Denominator + right.Numerator*left.Denominator, left.Denominator * right.Denominator);
+			
 		}
 		public static Fraction operator -(Fraction left, Fraction right)
 		{
@@ -91,24 +93,17 @@ namespace Fraction
 		}
 		public static bool operator ==(Fraction left, Fraction right)
 		{
-			if (left.Numerator * right.Denominator == right.Numerator * left.Denominator)
-				return true;
-			else
-				return false;
+			return left.Numerator * right.Denominator == right.Numerator * left.Denominator;
 		}
 		public static bool operator >(Fraction left, Fraction right)
 		{
-			if (left.Numerator * right.Denominator > right.Numerator * left.Denominator)
-				return true;
-			else
-				return false;
+			return left.Numerator * right.Denominator > right.Numerator * left.Denominator;
+				
 		}
 		public static bool operator <(Fraction left, Fraction right)
 		{
-			if (left.Numerator * right.Denominator < right.Numerator * left.Denominator)
-				return true;
-			else
-				return false;
+			return left.Numerator * right.Denominator < right.Numerator * left.Denominator;
+				
 		}
 		public static bool operator >=(Fraction left, Fraction right)
 		{
